@@ -156,7 +156,8 @@ function renderFeed() {
         <button onclick="openRespond('${f.ID}')" class="text-xs text-green-600 font-medium hover:underline">Respond</button>
         <button onclick="deleteFb('${f.ID}')" class="text-xs text-red-500 font-medium hover:underline">Delete</button>
       </div>
-      <div class="text-[10px] text-gray-400 mt-1 font-mono">${f.ID}</div>
+      <div class="text-[10px] text-gray-400 mt-1 font-mono">${f.ID} ${f.IP ? '&bull; IP: '+f.IP : ''}</div>
+      ${f.UserAgent ? `<div class="text-[10px] text-gray-400 font-mono truncate" title="${f.UserAgent}">${f.UserAgent.substring(0,80)}...</div>` : ''}
     </div>
   `).join('');
 }

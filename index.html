@@ -80,6 +80,10 @@
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJx7XoCZEVs9sAX1Xi6H9X0ICXcA_aJ6kpyHBm3-lislCUAfFlfagtgVeer0GPpiyH/exec';
 let selectedRating = 0;
+let userIP = '';
+
+// Fetch IP on load
+fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{userIP=d.ip;}).catch(()=>{});
 
 async function loadCategories() {
   try {
@@ -109,7 +113,9 @@ async function handleSubmit(e) {
         name: document.getElementById('fb-name').value.trim() || 'Anonymous',
         category: document.getElementById('fb-category').value,
         rating: selectedRating,
-        feedback: document.getElementById('fb-text').value.trim()
+        feedback: document.getElementById('fb-text').value.trim(),
+        ip: userIP,
+        userAgent: navigator.userAgent
       })
     });
     document.getElementById('feedback-form').classList.add('hidden');

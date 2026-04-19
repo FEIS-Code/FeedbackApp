@@ -87,7 +87,9 @@ function submitFeedback(data) {
     parseInt(data.rating) || 0,
     (data.feedback || '').trim(),
     '', // Admin Response
-    'New' // Status
+    'New', // Status
+    data.ip || '',
+    data.userAgent || ''
   ]);
   return { success: true, id: id };
 }
@@ -214,7 +216,7 @@ function setupData() {
 
   var fs = ss.getSheetByName(FEEDBACK_SHEET) || ss.insertSheet(FEEDBACK_SHEET);
   fs.clear();
-  fs.appendRow(['ID', 'Date', 'Name', 'Category', 'Rating', 'Feedback', 'Response', 'Status']);
+  fs.appendRow(['ID', 'Date', 'Name', 'Category', 'Rating', 'Feedback', 'Response', 'Status', 'IP', 'UserAgent']);
 
   Logger.log('Setup complete');
 }
